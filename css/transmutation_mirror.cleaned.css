@@ -1,0 +1,61 @@
+/* Transmutation Mirror Styles */
+#transmutation-mirror {
+  position: relative;
+  background: linear-gradient(to bottom, #0a0a0a, #1a0e0e);
+  color: #f4e3c1;
+  padding: 6vh 4vw;
+  min-height: 100vh;
+  font-family: "HomemadeApple", cursive;
+  overflow: hidden;
+}
+
+.mirror-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+  z-index: 2;
+}
+
+.mirror-title {
+  font-size: 2.2em;
+  margin-bottom: 1em;
+  letter-spacing: 0.02em;
+  color: #ffdca8;
+}
+
+.mirror-caption {
+  margin-top: 2em;
+  font-size: 1.1em;
+  color: #cbb9a1;
+}
+
+#mirror-canvas-container canvas {
+  display: block;
+  margin: 0 auto;
+  z-index: 1;
+  pointer-events: none;
+}
+
+canvas {
+  border-radius: 12px;
+  box-shadow: 0 0 50px rgba(255, 206, 143, 0.25);
+}
+
+#mirror-canvas {
+  position: relative;
+  overflow: hidden;
+}
+
+#mirror-canvas canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  border-radius: 9999px;
+}
+
+canvas {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block;
+}

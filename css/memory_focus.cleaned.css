@@ -1,0 +1,162 @@
+/* Memory Focus Overlay Styles */
+#memory-focus {
+  position: fixed;
+  inset: 0;
+  background: rgba(5, 5, 5, 0.85);
+  backdrop-filter: blur(6px);
+  z-index: 999;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+}
+
+#memory-focus::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 30%,
+    rgba(var(--orb-color), 0.2) 45%,
+    rgba(var(--orb-color), 0.1) 60%,
+    transparent 80%
+  );
+  filter: blur(16px);
+  pointer-events: none;
+  z-index: 1;
+}
+
+#memory-focus::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(var(--orb-color), 0.05),
+    transparent 70%
+  );
+  pointer-events: none;
+  animation: pulseGlow 4s ease-in-out infinite;
+  z-index: 1;
+}
+
+@keyframes pulseGlow {
+  0%,
+  100% {
+    opacity: 0.3;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.5;
+    transform: scale(1.05);
+  }
+}
+
+#memory-frame {
+  position: relative;
+  z-index: 2;
+  background: none;
+  border: none;
+  color: white;
+  max-width: 800px;
+  width: 85vw;
+  padding: 0;
+  text-align: center;
+  min-height: 300px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  text-align: center;
+}
+
+#memory-frame::before {
+  content: "";
+  position: absolute;
+  inset: -15% -25%;
+  border-radius: 55% / 48%;
+  background: radial-gradient(
+    ellipse at center,
+    rgba(0, 0, 0, 0) 20%,
+    rgba(var(--orb-color), 0.35) 50%,
+    rgba(var(--orb-color), 0.22) 60%,
+    rgba(var(--orb-color), 0.1) 75%,
+    transparent 90%
+  );
+  filter: blur(32px);
+  pointer-events: none;
+  z-index: 0;
+  opacity: 1;
+  animation: ripplePulse 6s ease-in-out infinite;
+}
+
+#memory-frame > * {
+  position: relative;
+  z-index: 2;
+}
+
+#memory-text {
+  font-family: "Nothing You Could Do", cursive;
+  font-size: 1.5rem;
+  white-space: pre-wrap;
+  line-height: 2;
+  margin-bottom: 2rem;
+  letter-spacing: 0.4px;
+  overflow: hidden;
+  opacity: 0;
+  animation: scrawlFade 8s ease-out forwards;
+}
+
+@keyframes scrawlFade {
+  0% {
+    opacity: 0;
+  }
+  20% {
+    opacity: 0.3;
+  }
+  60% {
+    opacity: 0.85;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+.memory-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  max-width: 600px;
+  padding: 0 1rem;
+  font-size: 1rem;
+  color: #aaa;
+  font-family: "Nothing You Could Do", cursive;
+  opacity: 0;
+  animation: fadeMeta 1s ease-in 2.5s forwards;
+}
+
+@keyframes fadeMeta {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes ripplePulse {
+  0%,
+  100% {
+    transform: scaleX(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scaleX(1.03);
+    opacity: 0.95;
+  }
+}

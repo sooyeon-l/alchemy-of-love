@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>The Alchemy of Love</title>
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600;700&family=Inter:wght@300;400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Literata:ital,wght@0,400;0,500;1,400&display=swap"
+      rel="stylesheet"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nothing+You+Could+Do&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- p5.js -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/1.9.0/p5.min.js"></script>
+
+    <!-- Styles -->
+    <link rel="stylesheet" href="css/memory_focus.css" />
+    <link rel="stylesheet" href="css/loom.css" />
+    <link rel="stylesheet" href="css/transmutation_mirror.css" />
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body class="antialiased">
+    <!-- Landing Page -->
+    <section
+      id="landing"
+      class="min-h-screen flex flex-col justify-center items-center bg-white text-gray-900 transition-opacity duration-700 ease-in-out"
+    >
+      <h1 class="exhibition-title">The Alchemy of Love</h1>
+
+      <div class="flex space-x-12">
+        <!-- CLOCK -->
+        <div data-section="clock" class="dot-glow">
+          <div
+            id="dot-clock"
+            class="w-6 h-6 rounded-full bg-[#1a1a1a] animate-soft-bounce transition-colors duration-1000"
+          ></div>
+          <div class="dot-label">Clock Without Hands</div>
+        </div>
+
+        <!-- LOOM -->
+        <div data-section="loom" class="dot-glow">
+          <div
+            id="dot-loom"
+            class="w-6 h-6 rounded-full bg-[#222222] animate-soft-bounce transition-colors duration-1000"
+          ></div>
+          <div class="dot-label">Memory Loom</div>
+        </div>
+
+        <!-- MIRROR -->
+        <div data-section="mirror" class="dot-glow">
+          <div
+            id="dot-mirror"
+            class="w-6 h-6 rounded-full bg-[#2c2c2c] animate-soft-bounce transition-colors duration-1000"
+          ></div>
+          <div class="dot-label">Transmutation Mirror</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main Content -->
+    <main>
+      <!-- Section 1: Clock Without Hands -->
+      <section
+        id="clock"
+        class="fade-section hidden min-h-screen flex flex-col justify-center items-center text-white text-center"
+      >
+        <div id="clock-canvas" class="absolute inset-0 -z-10"></div>
+
+        <h1 class="exhibition-title">I. Clock Without Hands</h1>
+        <p class="text-gray-400 mb-8 max-w-xl text-center">
+          An exploration of timeless moments and the cyclical nature of
+          connection.
+        </p>
+
+        <div id="memory-toggle" class="z-10 w-fit max-w-[90vw]">
+          <div
+            id="memory-card"
+            class="transition-all duration-500 ease-in-out overflow-hidden bg-gradient-to-br from-indigo-800/40 to-violet-900/50 backdrop-blur-2xl shadow-xl ring-1 ring-white/10 text-white rounded-2xl px-6 pt-4 pb-2 mx-auto w-[250px] hover:ring-2 hover:ring-indigo-300/30"
+          >
+            <button
+              id="memory-header"
+              class="w-full text-sm tracking-wide font-medium text-white/80 text-center pb-2"
+            >
+              🌙 Share a memory...
+            </button>
+
+            <div
+              id="memory-body"
+              class="opacity-0 max-h-0 transition-all duration-500 ease-in-out"
+            >
+              <form id="memory-form" class="space-y-4">
+                <div>
+                  <label
+                    for="memory-input"
+                    class="block text-sm font-serif text-indigo-200 tracking-wide"
+                  >
+                    Describe a moment when time stopped because of love.
+                  </label>
+                  <textarea
+                    id="memory-input"
+                    rows="3"
+                    class="mt-1 block w-full memory-textarea font-light text-sm leading-relaxed tracking-wide"
+                    placeholder="e.g. When they looked at me and smiled."
+                  ></textarea>
+                </div>
+                <button
+                  type="submit"
+                  class="w-full text-sm tracking-wider uppercase bg-indigo-500 hover:bg-indigo-600 text-white py-2 px-4 rounded-md transition duration-300"
+                >
+                  Release into the Aether
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <p
+            id="memory-response"
+            class="mt-4 text-sm text-indigo-300 text-center transition-opacity duration-500 ease-in-out"
+          ></p>
+        </div>
+      </section>
+
+      <!-- Section 2: Memory Loom -->
+      <!-- index.html -->
+      <section id="loom" class="fade-section hidden">
+        <div class="loom-content">
+          <h1 class="exhibition-title">II. Memory Loom</h1>
+          <p class="loom-description">
+            Choose a spool. Weave a memory.<br />Watch it become part of
+            something greater.
+          </p>
+        </div>
+
+        <div id="loom-canvas"></div>
+
+        <!-- ✅ This is your working modal -->
+        <div id="loom-modal" class="loom-modal hidden">
+          <div class="loom-modal-content">
+            <button class="loom-close-button" onclick="closeModal()">×</button>
+            <p id="modal-prompt" class="loom-modal-prompt">
+              Share your memory below:
+            </p>
+            <textarea
+              id="loom-input"
+              placeholder="Type your memory here..."
+              class="loom-modal-textarea"
+            ></textarea>
+            <button id="submit-memory-button" class="loom-modal-submit">
+              Weave Memory
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Section 3: Transmutation Mirror -->
+      <section
+        id="mirror"
+        class="fade-section hidden min-h-screen flex flex-col justify-center items-center text-white bg-gradient-to-b from-[#222222] to-[#2a2a2a]"
+      >
+        <h1 class="exhibition-title font-title">III. Transmutation Mirror</h1>
+        <p class="text-gray-400 mb-8 max-w-xl text-center">
+          Move gently. Love leaves traces.
+        </p>
+        <div
+          id="mirror-canvas"
+          class="interactive-placeholder w-1/2 h-1/2 max-w-md aspect-square rounded-full"
+        ></div>
+      </section>
+    </main>
+
+    <!-- Global Back to Gallery Button -->
+    <div id="back-btn-wrapper" class="fixed top-6 left-6 z-[999] hidden">
+      <div
+        onclick="returnToGallery()"
+        aria-label="Return"
+        class="css-triangle cursor-pointer"
+      ></div>
+    </div>
+
+    <!-- Memory Focus Overlay -->
+    <div id="memory-focus" style="display: none">
+      <div id="memory-frame">
+        <div id="memory-text"></div>
+        <div class="memory-meta">
+          <span id="memory-emotion"></span>
+          <span id="memory-timestamp"></span>
+        </div>
+      </div>
+    </div>
+    <div id="thread-note" class="thread-note hidden"></div>
+    <div id="thread-hover-label" class="thread-hover-label hidden"></div>
+
+    <!-- Scripts -->
+    <script src="js/modal.js"></script>
+    <script type="module" src="js/orb.js"></script>
+    <script type="module" src="js/loom.js"></script>
+    <script type="module" src="js/sketch.js"></script>
+    <script type="module" src="js/transmutation_mirror.js"></script>
+    <script type="module" src="main.js"></script>
+    <script src="js/memory_focus.js" defer></script>
+  </body>
+</html>

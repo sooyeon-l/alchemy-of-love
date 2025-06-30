@@ -1,0 +1,21 @@
+# VS Code settings
+.vscode/
+
+# Node modules (in case you add any tools later)
+node_modules/
+
+# Environment variables
+server/.env
+.env
+.env.local
+
+# Build output directories (optional/future use)
+dist/
+build/
+
+# Log files
+*.log
+
+# OS-generated files
+Thumbs.db
+desktop.ini
